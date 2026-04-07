@@ -77,7 +77,9 @@ const Navbar = ({ activeTab, setActiveTab }) => {
                 key={tab.id}
                 onClick={() => {
                   triggerHaptic(ImpactStyle.Light);
-                  setActiveTab(tab.id);
+                  if (typeof setActiveTab === 'function') {
+                    setActiveTab(tab.id);
+                  }
                 }}
                 className={`flex flex-col items-center justify-center gap-1.5 py-1 transition-all ${
                   activeTab === tab.id ? "text-[#31005e] scale-110" : "text-slate-400 opacity-60"

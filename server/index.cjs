@@ -6267,6 +6267,9 @@ app.post("/api/ozow/notify", async (req, res) => {
   }
 });
 
+// Family Wallet Proxy Routes Removed. 
+// Frontend now uses direct Supabase Client for all Family Hub operations.
+
 // Catch-all 404 handler - MUST be after all route definitions
 app.use((req, res) => {
   res.status(404).json({ error: "Not found", message: "This is the API server. The frontend is served separately." });

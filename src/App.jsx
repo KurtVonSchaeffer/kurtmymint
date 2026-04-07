@@ -57,6 +57,7 @@ import { isPinEnabled } from "./lib/usePin.js";
 import GoalLinkModal from "./components/GoalLinkModal.jsx";
 import { useOnboardingStatus } from "./lib/useOnboardingStatus.js";
 import { checkOnboardingComplete } from "./lib/checkOnboardingComplete.js";
+import FamilyPage from "./pages/FamilyPage.jsx";
 
 const PERSISTENT_KEYS = [
   'mint_device_id',
@@ -658,6 +659,7 @@ const App = () => {
               onOpenCreditApply={noOp}
               onOpenCreditRepay={noOp}
               onOpenInvest={noOp}
+              onOpenFamily={() => navigateTo("family")}
               onOpenWithdraw={noOp}
               onOpenSettings={noOp}
             />
@@ -760,6 +762,19 @@ const App = () => {
             onCloseModal={noOp}
           >
             <DepositPage onBack={noOp} />
+          </AppLayout>
+        );
+      case "family":
+        return (
+          <AppLayout
+            activeTab="home"
+            onTabChange={handleTabChange}
+            onWithdraw={handleWithdrawRequest}
+            onShowComingSoon={handleShowComingSoon}
+            modal={modal}
+            onCloseModal={closeModal}
+          >
+            <FamilyPage onBack={goBack} />
           </AppLayout>
         );
       case 'stockDetail':
@@ -1107,7 +1122,22 @@ const App = () => {
           onOpenNews={() => { setMarketsInitialView("news"); navigateTo("markets"); }}
           onOpenNewsArticle={(articleId) => { setSelectedArticleId(articleId); navigateTo("newsArticle"); }}
           onOpenInstantLiquidity={() => navigateTo("instantLiquidity")}
+          onOpenFamily={() => navigateTo("family")}
         />
+      </AppLayout>
+    );
+  }
+  if (currentPage === "family") {
+    return (
+      <AppLayout
+        activeTab="home"
+        onTabChange={handleTabChange}
+        onWithdraw={handleWithdrawRequest}
+        onShowComingSoon={handleShowComingSoon}
+        modal={modal}
+        onCloseModal={closeModal}
+      >
+        <FamilyPage onBack={goBack} />
       </AppLayout>
     );
   }
